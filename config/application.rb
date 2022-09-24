@@ -6,6 +6,13 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+unless Rails.env.production?
+  Dotenv.load(".env.#{Rails.env}.local",
+              ".env.#{Rails.env}",
+              '.env.local',
+              '.env')
+end
+
 module Shoplette
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
